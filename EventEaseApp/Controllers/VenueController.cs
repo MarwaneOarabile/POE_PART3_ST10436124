@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
+// this code was sourced from Juliana Adeola Adisa lessons and modified to fit the project
 namespace EventEaseApp.Controllers
 {
     public class VenueController : Controller
@@ -44,7 +46,7 @@ namespace EventEaseApp.Controllers
             return View(venue);
         }
 
-        // GET: Edit
+        
         public async Task<IActionResult> Edit(int? venueid)
         {
             if (venueid == null)
@@ -57,7 +59,7 @@ namespace EventEaseApp.Controllers
             return View(venue);
         }
 
-        // POST: Edit
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int venueid, Venue venue)
@@ -116,17 +118,17 @@ namespace EventEaseApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int venueid)
         {
-            // Find the venue by ID
+            
             var venue = await _context.Venue.FindAsync(venueid);
 
-            // Check if the venue exists
+            
             if (venue == null)
             {
-                // If not, return a NotFound result
+                
                 return NotFound();
             }
 
-            // If the venue exists, remove it from the context and save changes
+            
             _context.Venue.Remove(venue);
             await _context.SaveChangesAsync();
 

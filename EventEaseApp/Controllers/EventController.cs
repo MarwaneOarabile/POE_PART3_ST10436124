@@ -1,6 +1,7 @@
 ﻿using EventEaseApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+// this code was sourced from Juliana Adeola Adisa lessons and modified to fit the project
 
 namespace EventEaseApp.Controllers
 {
@@ -13,20 +14,20 @@ namespace EventEaseApp.Controllers
             _context = context;
         }
 
-        // GET: Event Index
+       
         public async Task<ActionResult> Index()
         {
             var events = await _context.Event.ToListAsync();
             return View(events);
         }
 
-        // GET: Event Create
+        
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Event Create
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Event events)
@@ -40,7 +41,6 @@ namespace EventEaseApp.Controllers
             return View(events);
         }
 
-        // GET: Event Edit
         public async Task<IActionResult> Edit(int? eventid)
         {
             if (eventid == null)
@@ -53,7 +53,7 @@ namespace EventEaseApp.Controllers
             return View(eventItem);
         }
 
-        // POST: Event Edit
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int eventid, Event events)
@@ -81,7 +81,7 @@ namespace EventEaseApp.Controllers
             return View(events);
         }
 
-        // GET: Event Details
+        
         public async Task<IActionResult> Details(int? eventid)
         {
             if (eventid == null)
@@ -94,7 +94,7 @@ namespace EventEaseApp.Controllers
             return View(eventItem);
         }
 
-        // GET: Event Delete
+       
         public async Task<IActionResult> Delete(int eventid)
         {
             var eventItem = await _context.Event.FindAsync(eventid);
@@ -104,7 +104,7 @@ namespace EventEaseApp.Controllers
             return View(eventItem);
         }
 
-        // POST: Event Delete
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int eventid)

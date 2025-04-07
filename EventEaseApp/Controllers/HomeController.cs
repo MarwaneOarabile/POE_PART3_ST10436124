@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using EventEaseApp.Models;
 
 namespace EventEaseApp.Controllers;
+// this code was sourced from Juliana Adeola Adisa lessons and modified to fit the project
 
 public class HomeController : Controller
 {
