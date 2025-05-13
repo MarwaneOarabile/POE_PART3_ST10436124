@@ -7673,23 +7673,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lab_services_student\\.nuget\\packages\\": {},
+    "C:\\Users\\Oarabile Marwane\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lab_services_student\\Desktop\\part-1-poe-MarwaneOarabile\\EventEaseApp\\EventEaseApp.csproj",
+      "projectUniqueName": "C:\\Users\\Oarabile Marwane\\OneDrive - ADvTECH Ltd\\CLDV_Part2\\EventEaseApp\\EventEaseApp.csproj",
       "projectName": "EventEaseApp",
-      "projectPath": "C:\\Users\\lab_services_student\\Desktop\\part-1-poe-MarwaneOarabile\\EventEaseApp\\EventEaseApp.csproj",
-      "packagesPath": "C:\\Users\\lab_services_student\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lab_services_student\\Desktop\\part-1-poe-MarwaneOarabile\\EventEaseApp\\obj\\",
+      "projectPath": "C:\\Users\\Oarabile Marwane\\OneDrive - ADvTECH Ltd\\CLDV_Part2\\EventEaseApp\\EventEaseApp.csproj",
+      "packagesPath": "C:\\Users\\Oarabile Marwane\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Oarabile Marwane\\OneDrive - ADvTECH Ltd\\CLDV_Part2\\EventEaseApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\lab_services_student\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Oarabile Marwane\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7698,6 +7698,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -7760,7 +7761,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
