@@ -678,3 +678,6 @@ C:\Users\Oarabile Marwane\OneDrive - ADvTECH Ltd\CLDV_Part2\EventEaseApp\obj\Deb
 C:\Users\Oarabile Marwane\OneDrive - ADvTECH Ltd\CLDV_Part2\EventEaseApp\obj\Debug\net9.0\EventEaseApp.pdb
 C:\Users\Oarabile Marwane\OneDrive - ADvTECH Ltd\CLDV_Part2\EventEaseApp\obj\Debug\net9.0\EventEaseApp.genruntimeconfig.cache
 C:\Users\Oarabile Marwane\OneDrive - ADvTECH Ltd\CLDV_Part2\EventEaseApp\obj\Debug\net9.0\ref\EventEaseApp.dll
+C:\Users\Oarabile Marwane\OneDrive - ADvTECH Ltd\CLDV_Part2\EventEaseApp\bin\Debug\net9.0\Azure.Storage.Blobs.dll
+C:\Users\Oarabile Marwane\OneDrive - ADvTECH Ltd\CLDV_Part2\EventEaseApp\bin\Debug\net9.0\Azure.Storage.Common.dll
+C:\Users\Oarabile Marwane\OneDrive - ADvTECH Ltd\CLDV_Part2\EventEaseApp\bin\Debug\net9.0\System.IO.Hashing.dll

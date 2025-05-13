@@ -1,6 +1,8 @@
-﻿using EventEaseApp.Models;
+﻿using Azure.Storage.Blobs;
+using EventEaseApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 
 // this code was sourced from Juliana Adeola Adisa lessons and modified to fit the project
@@ -39,14 +41,31 @@ namespace EventEaseApp.Controllers
         {
             if (ModelState.IsValid)
             {
+
+
+                // Handle image upload to Azure Blob Storage if an image file was provided
+                // This is Step 4C: Modify Controller to receive ImageFile from View (user upload)
+                // This is Step 5: Upload selected image to Azure Blob Storage
+                if (venue.ImageFile != null)
+                {
+
+                    // Upload image to Blob Storage (Azure)
+                    var blobUrl = await UploadImageToBlobAsync(venue.ImageFile); //Main part of Step 5 B (upload image to Azure Blob Storage)
+
+                    // Step 6: Save the Blob URL into ImageUrl property (the database)
+                    venue.ImageUrl = blobUrl;
+                }
+
                 _context.Add(venue);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Venue created successfully.";
                 return RedirectToAction(nameof(Index));
             }
             return View(venue);
         }
 
-        
+
+
         public async Task<IActionResult> Edit(int? venueid)
         {
             if (venueid == null)
@@ -59,20 +78,34 @@ namespace EventEaseApp.Controllers
             return View(venue);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int venueid, Venue venue)
+        public async Task<IActionResult> Edit(int id, Venue venue)
         {
-            if (venueid != venue.VenueID)
-                return NotFound();
+            if (id != venue.VenueID) return NotFound();
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    if (venue.ImageFile != null)
+                    {
+                        // Upload new image if provided
+                        var blobUrl = await UploadImageToBlobAsync(venue.ImageFile);
+
+                        // STep 6
+                        // Update Venue.ImageUrl with new Blob URL
+                        venue.ImageUrl = blobUrl;
+                    }
+                    else
+                    {
+                        // Keep the existing ImageUrl (Optional depending on your UI design)
+                    }
+
                     _context.Update(venue);
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Venue updated successfully.";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -83,7 +116,6 @@ namespace EventEaseApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-
             return View(venue);
         }
 
@@ -143,6 +175,35 @@ namespace EventEaseApp.Controllers
             return _context.Venue.Any(e => e.VenueID == venueid);
         }
 
+
+        // This is Step 5 (C): Upload selected image to Azure Blob Storage.
+        // It completes the entire uploading process inside Step 5 â€” from connecting to Azure to returning the Blob URL after upload.
+        // This will upload the Image to Blob Storage Account
+        // Uploads an image to Azure Blob Storage and returns the Blob URL
+        private async Task<string> UploadImageToBlobAsync(IFormFile imageFile)
+        {
+            var connectionString = "DefaultEndpointsProtocol=https;AccountName=eventeasestorage10436124;AccountKey=/yKS4jvLRpQbW4fLlVenPBtU+rMDorQla9Pe2pgKvQzdvW4peamFOHeiZy0VFc5ZA3UZiBYMnhzQ+AStYKxAAQ==;EndpointSuffix=core.windows.net";
+            var containerName = "eventeasecontainer";
+
+            var blobServiceClient = new BlobServiceClient(connectionString);
+            var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
+            var blobClient = containerClient.GetBlobClient(Guid.NewGuid() + Path.GetExtension(imageFile.FileName));
+
+            var blobHttpHeaders = new Azure.Storage.Blobs.Models.BlobHttpHeaders
+            {
+                ContentType = imageFile.ContentType
+            };
+
+            using (var stream = imageFile.OpenReadStream())
+            {
+                await blobClient.UploadAsync(stream, new Azure.Storage.Blobs.Models.BlobUploadOptions
+                {
+                    HttpHeaders = blobHttpHeaders
+                });
+            }
+
+            return blobClient.Uri.ToString();
+        }
 
 
 
