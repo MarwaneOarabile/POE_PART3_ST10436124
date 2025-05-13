@@ -1,42 +1,25 @@
 ﻿@model EventEaseApp.Models.Event
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Event Details";
 }
 
-<h1>Details</h1>
+<h1>@Model.EventName</h1>
 
 <div>
-    <h4>Event</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VenueID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VenueID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EventName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EventName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EventDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EventDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
+    <strong>Event Date:</strong> @Model.EventDate.ToShortDateString()
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.EventID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <strong>Description:</strong> @Model.Description
 </div>
+
+<!-- Fetch Venue Name using VenueID -->
+<div>
+    <strong>Venue:</strong> @ViewBag.VenueName
+</div>
+
+<p>
+    <a asp-action="Edit" asp-route-eventid="@Model.EventID" class="btn btn-primary">Edit</a> |
+    <a asp-action="Delete" asp-route-eventid="@Model.EventID" class="btn btn-danger">Delete</a> |
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</p>

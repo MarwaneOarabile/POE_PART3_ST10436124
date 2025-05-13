@@ -13,6 +13,17 @@ namespace EventEaseApp.Models
         public DbSet<Event> Event {get; set;}
         public DbSet<Booking> Booking { get; set; }
 
+        public DbSet<BookingOverview> BookingOverviewView { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<BookingOverview>()
+                .HasNoKey()
+                .ToView("BookingOverviewView");
+        }
+
 
     }
 }

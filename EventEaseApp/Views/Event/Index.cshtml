@@ -1,76 +1,51 @@
 ﻿@model IEnumerable<EventEaseApp.Models.Event>
 
 @{
-    ViewData["Title"] = "Event Index";
+    ViewData["Title"] = "Events";
 }
 
-<h1>Events List</h1>
-
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        @TempData["ErrorMessage"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-}
+<h1>Events</h1>
 
 @if (TempData["SuccessMessage"] != null)
 {
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @TempData["SuccessMessage"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
 }
 
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New Event</a>
 </p>
-<table class="table">
+
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EventID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VenueID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
+            <th>Event ID</th> <!-- Added column for EventID -->
+            <th>Event Name</th>
+            <th>Event Date</th>
+            <th>Description</th>
+            <th>Venue Name</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VenueID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.EventID</td> <!-- Display EventID -->
+                <td>@item.EventName</td>
+                <td>@item.EventDate.ToShortDateString()</td>
+                <td>@item.Description</td>
+                <td>@item.VenueName</td>
+                <td>
                     <a asp-action="Edit" asp-route-eventid="@item.EventID">Edit</a> |
                     <a asp-action="Details" asp-route-eventid="@item.EventID">Details</a> |
                     <a asp-action="Delete" asp-route-eventid="@item.EventID">Delete</a>
-            </td>
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

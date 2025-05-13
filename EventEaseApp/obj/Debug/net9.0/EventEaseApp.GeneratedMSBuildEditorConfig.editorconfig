@@ -68,8 +68,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Oarabile Marwane/OneDrive - ADvTECH Ltd/CLDV_Part2/EventEaseApp/Views/Home/BookingOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCb29raW5nT3ZlcnZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Oarabile Marwane/OneDrive - ADvTECH Ltd/CLDV_Part2/EventEaseApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Oarabile Marwane/OneDrive - ADvTECH Ltd/CLDV_Part2/EventEaseApp/Views/Home/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZWFyY2guY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Oarabile Marwane/OneDrive - ADvTECH Ltd/CLDV_Part2/EventEaseApp/Views/Shared/Error.cshtml]

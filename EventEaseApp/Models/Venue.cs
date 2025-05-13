@@ -19,11 +19,10 @@ namespace EventEaseApp.Models
         public int Capacity { get; set; }
 
         // stores url of the image
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
-        // stores the image
         [NotMapped]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
 
     }
 }

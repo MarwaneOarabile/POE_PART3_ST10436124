@@ -1,0 +1,51 @@
+﻿@model List<EventEaseApp.Models.consolidatesView>
+
+@{
+    ViewData["Title"] = "Search Bookings";
+    var hasSearched = !string.IsNullOrWhiteSpace(ViewData["SearchTerm"]?.ToString());
+}
+
+<h1>Search Bookings</h1>
+
+<form asp-action="Search" method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="searchTerm" value="@ViewData["SearchTerm"]" class="form-control" placeholder="Search by Booking ID or Event Name" />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+@if (hasSearched)
+{
+    if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Booking Date</th>
+                    <th>Event Name</th>
+                    <th>Event Description</th>
+                    <th>Venue Name</th>
+                    <th>Venue Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var booking in Model)
+                {
+                    <tr>
+                        <td>@booking.BookingID</td>
+                        <td>@booking.BookingDate.ToShortDateString()</td>
+                        <td>@booking.EventName</td>
+                        <td>@booking.EventDescription</td>
+                        <td>@booking.VenueName</td>
+                        <td>@booking.VenueLocation</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-danger mt-3">No bookings found.</p>
+    }
+}

@@ -41,8 +41,6 @@ namespace EventEaseApp.Controllers
         {
             if (ModelState.IsValid)
             {
-
-
                 // Handle image upload to Azure Blob Storage if an image file was provided
                 // This is Step 4C: Modify Controller to receive ImageFile from View (user upload)
                 // This is Step 5: Upload selected image to Azure Blob Storage
@@ -81,43 +79,46 @@ namespace EventEaseApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Venue venue)
+        public async Task<IActionResult> Edit(Venue venue)
         {
-            if (id != venue.VenueID) return NotFound();
+            if (!ModelState.IsValid)
+                return View(venue);
 
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    if (venue.ImageFile != null)
-                    {
-                        // Upload new image if provided
-                        var blobUrl = await UploadImageToBlobAsync(venue.ImageFile);
+                var existingVenue = await _context.Venue.AsNoTracking()
+                                        .FirstOrDefaultAsync(v => v.VenueID == venue.VenueID);
 
-                        // STep 6
-                        // Update Venue.ImageUrl with new Blob URL
-                        venue.ImageUrl = blobUrl;
-                    }
-                    else
-                    {
-                        // Keep the existing ImageUrl (Optional depending on your UI design)
-                    }
+                if (existingVenue == null)
+                    return NotFound();
 
-                    _context.Update(venue);
-                    await _context.SaveChangesAsync();
-                    TempData["SuccessMessage"] = "Venue updated successfully.";
-                }
-                catch (DbUpdateConcurrencyException)
+                if (venue.ImageFile != null)
                 {
-                    if (!VenueExists(venue.VenueID))
-                        return NotFound();
-                    else
-                        throw;
+                    // New image uploaded: replace
+                    var blobUrl = await UploadImageToBlobAsync(venue.ImageFile);
+                    venue.ImageUrl = blobUrl;
                 }
+                else
+                {
+                    // No new image: keep existing one
+                    venue.ImageUrl = existingVenue.ImageUrl;
+                }
+
+                _context.Update(venue);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Venue updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
-            return View(venue);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!VenueExists(venue.VenueID))
+                    return NotFound();
+                else
+                    throw;
+            }
         }
+
 
 
 
