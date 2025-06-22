@@ -8,10 +8,14 @@
     ".NETCoreApp,Version=v9.0": {
       "EventEaseApp/1.0.0": {
         "dependencies": {
+          "Azure.Data.Tables": "12.9.1",
           "Azure.Storage.Blobs": "12.24.0",
+          "Azure.Storage.Files.Shares": "12.20.1",
+          "Azure.Storage.Queues": "12.20.1",
           "Microsoft.EntityFrameworkCore": "9.0.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "9.0.3",
           "Microsoft.EntityFrameworkCore.Tools": "9.0.3",
+          "Microsoft.Extensions.Azure": "1.7.6",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "9.0.0"
         },
         "runtime": {
@@ -36,7 +40,19 @@
           }
         }
       },
-      "Azure.Identity/1.11.4": {
+      "Azure.Data.Tables/12.9.1": {
+        "dependencies": {
+          "Azure.Core": "1.44.1",
+          "System.Text.Json": "9.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Azure.Data.Tables.dll": {
+            "assemblyVersion": "12.9.1.0",
+            "fileVersion": "12.900.124.46702"
+          }
+        }
+      },
+      "Azure.Identity/1.12.0": {
         "dependencies": {
           "Azure.Core": "1.44.1",
           "Microsoft.Identity.Client": "4.61.3",
@@ -48,8 +64,8 @@
         },
         "runtime": {
           "lib/netstandard2.0/Azure.Identity.dll": {
-            "assemblyVersion": "1.11.4.0",
-            "fileVersion": "1.1100.424.31005"
+            "assemblyVersion": "1.12.0.0",
+            "fileVersion": "1.1200.24.31701"
           }
         }
       },
@@ -73,6 +89,31 @@
           "lib/net8.0/Azure.Storage.Common.dll": {
             "assemblyVersion": "12.23.0.0",
             "fileVersion": "12.2300.25.16105"
+          }
+        }
+      },
+      "Azure.Storage.Files.Shares/12.20.1": {
+        "dependencies": {
+          "Azure.Storage.Common": "12.23.0",
+          "System.Text.Json": "9.0.3"
+        },
+        "runtime": {
+          "lib/net6.0/Azure.Storage.Files.Shares.dll": {
+            "assemblyVersion": "12.20.1.0",
+            "fileVersion": "12.2000.124.51104"
+          }
+        }
+      },
+      "Azure.Storage.Queues/12.20.1": {
+        "dependencies": {
+          "Azure.Storage.Common": "12.23.0",
+          "System.Memory.Data": "6.0.0",
+          "System.Text.Json": "9.0.3"
+        },
+        "runtime": {
+          "lib/net6.0/Azure.Storage.Queues.dll": {
+            "assemblyVersion": "12.20.1.0",
+            "fileVersion": "12.2000.124.51019"
           }
         }
       },
@@ -1148,7 +1189,7 @@
       "Microsoft.CSharp/4.5.0": {},
       "Microsoft.Data.SqlClient/5.1.6": {
         "dependencies": {
-          "Azure.Identity": "1.11.4",
+          "Azure.Identity": "1.12.0",
           "Microsoft.Data.SqlClient.SNI.runtime": "5.1.1",
           "Microsoft.Identity.Client": "4.61.3",
           "Microsoft.IdentityModel.JsonWebTokens": "6.35.0",
@@ -1321,6 +1362,23 @@
           "Microsoft.EntityFrameworkCore.Design": "9.0.3"
         }
       },
+      "Microsoft.Extensions.Azure/1.7.6": {
+        "dependencies": {
+          "Azure.Core": "1.44.1",
+          "Azure.Identity": "1.12.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Configuration.Binder": "2.1.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.3",
+          "Microsoft.Extensions.Options": "9.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Azure.dll": {
+            "assemblyVersion": "1.7.6.0",
+            "fileVersion": "1.700.624.50402"
+          }
+        }
+      },
       "Microsoft.Extensions.Caching.Abstractions/9.0.3": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "9.0.3"
@@ -1347,6 +1405,11 @@
           }
         }
       },
+      "Microsoft.Extensions.Configuration/2.1.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.3"
+        }
+      },
       "Microsoft.Extensions.Configuration.Abstractions/9.0.3": {
         "dependencies": {
           "Microsoft.Extensions.Primitives": "9.0.3"
@@ -1356,6 +1419,11 @@
             "assemblyVersion": "9.0.0.0",
             "fileVersion": "9.0.325.11113"
           }
+        }
+      },
+      "Microsoft.Extensions.Configuration.Binder/2.1.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "2.1.0"
         }
       },
       "Microsoft.Extensions.DependencyInjection/9.0.3": {
@@ -2095,12 +2163,19 @@
       "path": "azure.core/1.44.1",
       "hashPath": "azure.core.1.44.1.nupkg.sha512"
     },
-    "Azure.Identity/1.11.4": {
+    "Azure.Data.Tables/12.9.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Sf4BoE6Q3jTgFkgBkx7qztYOFELBCo+wQgpYDwal/qJ1unBH73ywPztIJKXBXORRzAeNijsuxhk94h0TIMvfYg==",
-      "path": "azure.identity/1.11.4",
-      "hashPath": "azure.identity.1.11.4.nupkg.sha512"
+      "sha512": "sha512-d5529gg24alnMKbE8Aw7NY3q9dxFvzfhCMW+TtQA7GGIqASFSIh+536p2qdyJNPEQDFYtqfoLqIBlP9IGqgLfA==",
+      "path": "azure.data.tables/12.9.1",
+      "hashPath": "azure.data.tables.12.9.1.nupkg.sha512"
+    },
+    "Azure.Identity/1.12.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OBIM3aPz8n9oEO5fdnee+Vsc5Nl4W3FeslPpESyDiyByntQI5BAa76KD60eFXm9ulevnwxGZP9YXL8Y+paI5Uw==",
+      "path": "azure.identity/1.12.0",
+      "hashPath": "azure.identity.1.12.0.nupkg.sha512"
     },
     "Azure.Storage.Blobs/12.24.0": {
       "type": "package",
@@ -2115,6 +2190,20 @@
       "sha512": "sha512-X/pe1LS3lC6s6MSL7A6FzRfnB6P72rNBt5oSuyan6Q4Jxr+KiN9Ufwqo32YLHOVfPcB8ESZZ4rBDketn+J37Rw==",
       "path": "azure.storage.common/12.23.0",
       "hashPath": "azure.storage.common.12.23.0.nupkg.sha512"
+    },
+    "Azure.Storage.Files.Shares/12.20.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ovds3flK+t+evPRPNGGU5l4irhIcvhAqyDAcr6E3dXHvidJrdllNSaGSj+v36rIzcivIS4bCDKy390RRnBRScQ==",
+      "path": "azure.storage.files.shares/12.20.1",
+      "hashPath": "azure.storage.files.shares.12.20.1.nupkg.sha512"
+    },
+    "Azure.Storage.Queues/12.20.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ZylPb8kc1DkLvDhNjdKxSbC23hPzu74a7Wiil7UXIBjnIZOkLI+dfQSTTXiejQaHBNpgZC+xWjNyZa3a71AoBQ==",
+      "path": "azure.storage.queues/12.20.1",
+      "hashPath": "azure.storage.queues.12.20.1.nupkg.sha512"
     },
     "Humanizer/2.14.1": {
       "type": "package",
@@ -2669,6 +2758,13 @@
       "path": "microsoft.entityframeworkcore.tools/9.0.3",
       "hashPath": "microsoft.entityframeworkcore.tools.9.0.3.nupkg.sha512"
     },
+    "Microsoft.Extensions.Azure/1.7.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-o2dLnQ8cMw5p7KAtxAPukkk4Mhs4tu96nUyFee4lvfLZEkuyTLhLGT2D5o5bagCwHVxqzt+w4Eb4YOl/pLq6Cw==",
+      "path": "microsoft.extensions.azure/1.7.6",
+      "hashPath": "microsoft.extensions.azure.1.7.6.nupkg.sha512"
+    },
     "Microsoft.Extensions.Caching.Abstractions/9.0.3": {
       "type": "package",
       "serviceable": true,
@@ -2683,12 +2779,26 @@
       "path": "microsoft.extensions.caching.memory/9.0.3",
       "hashPath": "microsoft.extensions.caching.memory.9.0.3.nupkg.sha512"
     },
+    "Microsoft.Extensions.Configuration/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SS8ce1GYQTkZoOq5bskqQ+m7xiXQjnKRiGfVNZkkX2SX0HpXNRsKnSUaywRRuCje3v2KT9xeacsM3J9/G2exsQ==",
+      "path": "microsoft.extensions.configuration/2.1.0",
+      "hashPath": "microsoft.extensions.configuration.2.1.0.nupkg.sha512"
+    },
     "Microsoft.Extensions.Configuration.Abstractions/9.0.3": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-q5qlbm6GRUrle2ZZxy9aqS/wWoc+mRD3JeP6rcpiJTh5XcemYkplAcJKq8lU11ZfPom5lfbZZfnQvDqcUhqD5Q==",
       "path": "microsoft.extensions.configuration.abstractions/9.0.3",
       "hashPath": "microsoft.extensions.configuration.abstractions.9.0.3.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Binder/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Fls0O54Ielz1DiVYpcmiUpeizN1iKGGI5yAWAoShfmUvMcQ8jAGOK1a+DaflHA5hN9IOKvmSos0yewDYAIY0ZA==",
+      "path": "microsoft.extensions.configuration.binder/2.1.0",
+      "hashPath": "microsoft.extensions.configuration.binder.2.1.0.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyInjection/9.0.3": {
       "type": "package",

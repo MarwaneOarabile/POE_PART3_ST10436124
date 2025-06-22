@@ -16,28 +16,59 @@ namespace EventEaseApp.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchType, int? venueId, DateOnly? startDate, DateOnly? endDate, bool? available) // ✅ NEW: added availability
         {
-            var events = await (from e in _context.Event
-                                join v in _context.Venue on e.VenueID equals v.VenueID
-                                select new Event
-                                {
-                                    EventID = e.EventID,
-                                    EventName = e.EventName,
-                                    EventDate = e.EventDate,
-                                    Description = e.Description,
-                                    VenueName = v.VenueName
-                                }).ToListAsync();
+            var events = _context.Event
+                .Include(e => e.Venue)
+                .Include(e => e.EventType)
+                .AsQueryable();
 
-            return View(events);
+            if (!string.IsNullOrEmpty(searchType))
+            {
+                events = events.Where(e => e.EventType.Name == searchType);
+            }
+
+            if (venueId.HasValue)
+            {
+                events = events.Where(e => e.VenueID == venueId.Value);
+            }
+
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                events = events.Where(e => e.EventDate >= startDate && e.EventDate <= endDate);
+            }
+
+            if (available.HasValue) // ✅ NEW: availability filtering
+            {
+                events = events.Where(e => e.Venue.IsAvailable == available.Value);
+            }
+
+            // Provide dropdown filter options
+            ViewData["EventType"] = _context.EventType.ToList();
+            ViewData["Venues"] = _context.Venue.ToList();
+
+            // ✅ Store selected values in ViewBag to pre-fill the form in the view
+            ViewBag.SelectedType = searchType;
+            ViewBag.SelectedVenue = venueId;
+            ViewBag.StartDate = startDate?.ToString("yyyy-MM-dd");
+            ViewBag.EndDate = endDate?.ToString("yyyy-MM-dd");
+            ViewBag.Availability = available;
+
+            return View(await events.ToListAsync());
         }
+
+
+
 
 
 
         public IActionResult Create()
         {
             PopulateVenueDropdown();
+            ViewData["Venues"] = _context.Venue.ToList();
             return View();
+
+
         }
 
 
@@ -56,10 +87,15 @@ namespace EventEaseApp.Controllers
                         Console.WriteLine($"Field: {entry.Key}, Error: {error.ErrorMessage}");
                     }
                 }
-
+                
                 PopulateVenueDropdown(); // Repopulate dropdown if validation fails
+                ViewData["EvetTypes"] = _context.EventType.ToList();
+
                 return View(events);
             }
+
+            //
+            
 
             _context.Add(events);
             await _context.SaveChangesAsync();
@@ -79,6 +115,7 @@ namespace EventEaseApp.Controllers
             // Populate venue list for the dropdown
             PopulateVenueDropdown();
 
+            ViewData["EvetTypes"] = _context.EventType.ToList();
             return View(eventItem);
         }
 

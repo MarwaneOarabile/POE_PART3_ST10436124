@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2025-06-22T17:56:05.8226123Z"
+    },
+    "storage1": {
+      "restored": true,
+      "restoreTime": "2025-06-22T17:56:43.999323Z"
+    }
+  },
+  "parameters": {
+    "storage1.serviceConnectorResourceGroupName": {
+      "Name": "storage1.serviceConnectorResourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "ST10436124_RG"
+    },
+    "storage1.resourceGroupName": {
+      "Name": "storage1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "ST10436124_RG"
+    },
+    "storage1.subscriptionId": {
+      "Name": "storage1.subscriptionId",
+      "Type": "subscription",
+      "Value": "94721cd6-fa79-4657-a9bd-23906ab888ca"
+    }
+  }
+}

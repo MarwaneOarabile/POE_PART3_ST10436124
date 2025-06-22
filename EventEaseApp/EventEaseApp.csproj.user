@@ -12,7 +12,7 @@
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>True</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>EventEaseApp.Models.EventEaseDBContext</WebStackScaffolding_DbContextTypeFullName>
-    <NameOfLastUsedPublishProfile>C:\Users\Oarabile Marwane\OneDrive - ADvTECH Ltd\CLDV_Part2\EventEaseApp\Properties\PublishProfiles\ST10436124 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\Oarabile Marwane\OneDrive - ADvTECH Ltd\ST10436124_CLDV_POE_Part3\CLDV_Part3\EventEaseApp\Properties\PublishProfiles\ST10436124 - Web Deploy1.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>

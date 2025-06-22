@@ -24,5 +24,9 @@ namespace EventEaseApp.Models
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
 
+        public bool IsAvailable { get; set; }
+
+        public ICollection<Event> Events { get; set; }
+
     }
 }

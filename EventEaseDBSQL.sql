@@ -1,7 +1,7 @@
 -- database creation
 USE master
-IF EXISTS (SELECT*FROM sys.databases WHERE name = 'EventEaseDB')
-DROP DATABASE EventEaseDB
+
+
 
 
 CREATE DATABASE EventEaseDB
@@ -18,14 +18,22 @@ ImageUrl VARCHAR(250) NOT NULL
 
 );
 
+-- question 3 
+CREATE TABLE EventType (
+EventTypeID INT IDENTITY(5000,1) PRIMARY KEY,
+Name VARCHAR(250) NOT NULL
+);
+
 -- TABLE CREATION
 CREATE TABLE [Event](
 EventID INT IDENTITY(200,1) PRIMARY KEY NOT NULL,
 VenueID INT NOT NULL,
+EventTypeID INT NULL, 
 EventName VARCHAR(250) NOT NULL,
 EventDate DATE NOT NULL,
 [Description] VARCHAR(250) NOT NULL,
-FOREIGN KEY (VenueID) REFERENCES Venue(VenueID)
+FOREIGN KEY (VenueID) REFERENCES Venue(VenueID), 
+FOREIGN KEY (EventTypeID) references EventType(EventTypeID) ON DELETE SET NULL
 );
 
 -- TABLE CREATION
@@ -34,8 +42,9 @@ BookingID INT IDENTITY(300,1) PRIMARY KEY NOT NULL,
 EventID INT NOT NULL,
 VenueID INT NOT NULL,
 BookingDate DATE NOT NULL,
-FOREIGN KEY (EventID) REFERENCES [Event](EventID),
-FOREIGN KEY (VenueID) REFERENCES Venue(VenueID)
+FOREIGN KEY (EventID) REFERENCES [Event](EventID) ON DELETE CASCADE,
+FOREIGN KEY (VenueID) REFERENCES Venue(VenueID) ON DELETE CASCADE,
+-- CONSTRAINT UQ_VENUE_EVENT UNIQUE (VenueID, EventID) -- no double boook of same venue for same event 
 );
 
 
@@ -49,15 +58,28 @@ VALUES
 ('The Venue Melrose Arch', 'Melrose, Johannesburg', 420, 'https://images.app.goo.gl/FEbMw1iqFs3vbBYB6'),
 ('Loftus Versfeld Stadium', 'Arcadia, Pretoria', 51762, 'https://images.app.goo.gl/PmH29NidCndENU2x7');
 
+
+
+-- Table Insertion
+-- INSERT: Event Type Data
+INSERT INTO EventType (Name) 
+VALUES 
+('Conference'),
+('Wedding'),
+('Naming'),
+('Birthday'),
+('Concert');
+
+
 --Table Insertion
 -- INSERT: Event Data
-INSERT INTO [Event] (VenueID, EventName, EventDate, [Description]) 
+INSERT INTO [Event] (VenueID, EventName, EventDate, [Description], EventTypeID) 
 VALUES 
-(100, 'Spring Wedding', '2025-09-21', 'A beautiful garden wedding ceremony.'),
-(101, 'Jazz Night', '2025-10-05', 'Live jazz band and wine tasting.'),
-(102, 'Tech Conference 2025', '2025-11-15', 'Annual tech innovations and networking.'),
-(103, 'Fashion Gala', '2025-12-02', 'Runway event with SA designers.'),
-(104, 'Football Final', '2025-12-20', 'Premier league season final.');
+(100, 'Spring Wedding', '2025-09-21', 'A beautiful garden wedding ceremony.', 5000),
+(101, 'Jazz Night', '2025-10-05', 'Live jazz band and wine tasting.', 5001),
+(102, 'Tech Conference 2025', '2025-11-15', 'Annual tech innovations and networking.' , 5002),
+(103, 'Fashion Gala', '2025-12-02', 'Runway event with SA designers.', 5003),
+(104, 'Football Final', '2025-12-20', 'Premier league season final.', 5004);
 
 --Table Insertion
 -- INSERT: Booking Data
@@ -69,6 +91,8 @@ VALUES
 (202, 102, '2025-08-15'),
 (203, 103, '2025-09-01'),
 (204, 104, '2025-10-10');
+
+
 
 
 --TABLE MANIPULATION
@@ -96,3 +120,6 @@ JOIN
     [Event] e ON b.EventID = e.EventID
 JOIN 
     Venue v ON b.VenueID = v.VenueID;
+
+	
+	

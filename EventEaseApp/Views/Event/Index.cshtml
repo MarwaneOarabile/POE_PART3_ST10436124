@@ -16,15 +16,84 @@
     <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
 }
 
+@using EventEaseApp.Models
+
+<!-- Filter Form -->
+<form asp-action="Index" method="get" class="mb-4">
+    <div class="row">
+        <!-- Event Type Filter -->
+        <div class="col-md-3">
+            <label for="searchType">Event Type</label>
+            <select name="searchType" class="form-control">
+                <option value="">All Types</option>
+                @foreach (var type in ViewData["EventType"] as List<EventType>)
+                {
+                    var isSelected = ViewBag.SelectedType == (type?.Name ?? "");
+                    <option value="@type.Name" selected="@(isSelected ? "selected" : null)">
+                        @type.Name
+                    </option>
+                }
+            </select>
+        </div>
+
+        <!-- Venue Filter -->
+        <div class="col-md-3">
+            <label for="venueId">Venue</label>
+            <select name="venueId" class="form-control">
+                <option value="">All Venues</option>
+                @foreach (var venue in ViewData["Venues"] as List<Venue>)
+                {
+                    var isSelected = ViewBag.SelectedVenue == venue.VenueID;
+                    <option value="@venue.VenueID" selected="@(isSelected ? "selected" : null)">
+                        @venue.VenueName
+                    </option>
+                }
+            </select>
+        </div>
+
+        <!-- Start Date Filter -->
+        <div class="col-md-3">
+            <label for="startDate">Start Date</label>
+            <input type="date" name="startDate" class="form-control" value="@ViewBag.StartDate" />
+        </div>
+
+        <!-- End Date Filter -->
+        <div class="col-md-3">
+            <label for="endDate">End Date</label>
+            <input type="date" name="endDate" class="form-control" value="@ViewBag.EndDate" />
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <!-- Availability Filter -->
+        <div class="col-md-3">
+            <label for="available">Availability</label>
+            <select name="available" class="form-control">
+                <option value="">All</option>
+                <option value="true" selected="@(ViewBag.Availability == true ? "selected" : null)">Available</option>
+                <option value="false" selected="@(ViewBag.Availability == false ? "selected" : null)">Unavailable</option>
+            </select>
+        </div>
+
+        <!-- Filter Button -->
+        <div class="col-md-3 d-flex align-items-end">
+            <button type="submit" class="btn btn-success">Filter</button>
+        </div>
+    </div>
+</form>
+
+<!-- Create Button -->
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New Event</a>
 </p>
 
+<!-- Event Table -->
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Event ID</th> <!-- Added column for EventID -->
+            <th>Event ID</th>
             <th>Event Name</th>
+            <th>Event Type</th>
             <th>Event Date</th>
             <th>Description</th>
             <th>Venue Name</th>
@@ -35,11 +104,12 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.EventID</td> <!-- Display EventID -->
+                <td>@item.EventID</td>
                 <td>@item.EventName</td>
+                <td>@item.EventType?.Name</td>
                 <td>@item.EventDate.ToShortDateString()</td>
                 <td>@item.Description</td>
-                <td>@item.VenueName</td>
+                <td>@item.Venue?.VenueName</td>
                 <td>
                     <a asp-action="Edit" asp-route-eventid="@item.EventID">Edit</a> |
                     <a asp-action="Details" asp-route-eventid="@item.EventID">Details</a> |
