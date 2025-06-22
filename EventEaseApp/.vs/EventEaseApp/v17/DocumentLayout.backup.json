@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\Oarabile Marwane\\OneDrive - ADvTECH Ltd\\ST10436124_CLDV_POE_Part3\\CLDV_Part3\\EventEaseApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{58EE39C2-C4A2-4BAD-8661-E79E22B16EA1}|EventEaseApp.csproj|c:\\users\\oarabile marwane\\onedrive - advtech ltd\\st10436124_cldv_poe_part3\\cldv_part3\\eventeaseapp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{58EE39C2-C4A2-4BAD-8661-E79E22B16EA1}|EventEaseApp.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{58EE39C2-C4A2-4BAD-8661-E79E22B16EA1}|EventEaseApp.csproj|c:\\users\\oarabile marwane\\onedrive - advtech ltd\\st10436124_cldv_poe_part3\\cldv_part3\\eventeaseapp\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{58EE39C2-C4A2-4BAD-8661-E79E22B16EA1}|EventEaseApp.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -30,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -45,21 +41,16 @@
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Oarabile Marwane\\OneDrive - ADvTECH Ltd\\ST10436124_CLDV_POE_Part3\\CLDV_Part3\\EventEaseApp\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Oarabile Marwane\\OneDrive - ADvTECH Ltd\\ST10436124_CLDV_POE_Part3\\CLDV_Part3\\EventEaseApp\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-22T19:30:29.9Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\Oarabile Marwane\\OneDrive - ADvTECH Ltd\\ST10436124_CLDV_POE_Part3\\CLDV_Part3\\EventEaseApp\\appsettings.Development.json",
               "RelativeDocumentMoniker": "appsettings.Development.json",
@@ -67,12 +58,11 @@
               "RelativeToolTip": "appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-22T19:30:27.254Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-22T19:30:27.254Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "EventType.cs",
               "DocumentMoniker": "C:\\Users\\Oarabile Marwane\\OneDrive - ADvTECH Ltd\\ST10436124_CLDV_POE_Part3\\CLDV_Part3\\EventEaseApp\\Models\\EventType.cs",
               "RelativeDocumentMoniker": "Models\\EventType.cs",
@@ -80,12 +70,11 @@
               "RelativeToolTip": "Models\\EventType.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T16:23:11.402Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-22T16:23:11.402Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Event.cs",
               "DocumentMoniker": "C:\\Users\\Oarabile Marwane\\OneDrive - ADvTECH Ltd\\ST10436124_CLDV_POE_Part3\\CLDV_Part3\\EventEaseApp\\Models\\Event.cs",
               "RelativeDocumentMoniker": "Models\\Event.cs",
@@ -93,12 +82,11 @@
               "RelativeToolTip": "Models\\Event.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-22T16:22:45.057Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-22T16:22:45.057Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Venue.cs",
               "DocumentMoniker": "C:\\Users\\Oarabile Marwane\\OneDrive - ADvTECH Ltd\\ST10436124_CLDV_POE_Part3\\CLDV_Part3\\EventEaseApp\\Models\\Venue.cs",
               "RelativeDocumentMoniker": "Models\\Venue.cs",
@@ -107,14 +95,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-22T16:22:18.707Z"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         }
