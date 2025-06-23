@@ -10,10 +10,10 @@ namespace EventEaseApp.Models
 
         public int VenueID { get; set; }
 
-        public Venue Venue { get; set; }
-        public string EventName { get; set; }
+        public Venue? Venue { get; set; }
+        public string? EventName { get; set; }
         public DateOnly EventDate { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         
         [NotMapped]
         public string? VenueName { get; set; }

@@ -24,43 +24,42 @@ namespace EventEaseApp.Controllers
             return View(venues);
         }
 
+
+        [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            return View(new Venue()); // Ensure model isn't null
         }
-
-        
-
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Create(Venue venue)
         {
             if (ModelState.IsValid)
             {
-                // Handle image upload to Azure Blob Storage if an image file was provided
-                // This is Step 4C: Modify Controller to receive ImageFile from View (user upload)
-                // This is Step 5: Upload selected image to Azure Blob Storage
-                if (venue.ImageFile != null)
+                try
                 {
+                    if (venue.ImageFile != null)
+                    {
+                        var blobUrl = await UploadImageToBlobAsync(venue.ImageFile);
+                        venue.ImageUrl = blobUrl;
+                    }
 
-                    // Upload image to Blob Storage (Azure)
-                    var blobUrl = await UploadImageToBlobAsync(venue.ImageFile); //Main part of Step 5 B (upload image to Azure Blob Storage)
+                    _context.Add(venue);
+                    await _context.SaveChangesAsync();
 
-                    // Step 6: Save the Blob URL into ImageUrl property (the database)
-                    venue.ImageUrl = blobUrl;
+                    TempData["SuccessMessage"] = "Venue created successfully.";
+                    return RedirectToAction(nameof(Index));
                 }
-
-                _context.Add(venue);
-                await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Venue created successfully.";
-                return RedirectToAction(nameof(Index));
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "An error occurred while saving the venue.");
+                }
             }
-            return View(venue);
+
+            return View(venue); // Show validation errors and keep form data
         }
+
 
 
 
@@ -76,48 +75,55 @@ namespace EventEaseApp.Controllers
             return View(venue);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Venue venue)
+        public async Task<IActionResult> Edit(int venueid, Venue venue)
         {
-            if (!ModelState.IsValid)
-                return View(venue);
+            if (venueid != venue.VenueID)
+                return NotFound();
 
-            try
+            if (ModelState.IsValid)
             {
-                var existingVenue = await _context.Venue.AsNoTracking()
-                                        .FirstOrDefaultAsync(v => v.VenueID == venue.VenueID);
-
-                if (existingVenue == null)
-                    return NotFound();
-
-                if (venue.ImageFile != null)
+                try
                 {
-                    // New image uploaded: replace
-                    var blobUrl = await UploadImageToBlobAsync(venue.ImageFile);
-                    venue.ImageUrl = blobUrl;
+                    var existingVenue = await _context.Venue.AsNoTracking()
+                        .FirstOrDefaultAsync(v => v.VenueID == venue.VenueID);
+
+                    if (existingVenue == null)
+                        return NotFound();
+
+                    // Handle image update
+                    if (venue.ImageFile != null)
+                    {
+                        var blobUrl = await UploadImageToBlobAsync(venue.ImageFile);
+                        venue.ImageUrl = blobUrl;
+                    }
+                    else
+                    {
+                        venue.ImageUrl = existingVenue.ImageUrl;
+                    }
+
+                    _context.Update(venue);
+                    await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Venue updated successfully.";
+                    return RedirectToAction(nameof(Index));
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    // No new image: keep existing one
-                    venue.ImageUrl = existingVenue.ImageUrl;
-                }
-
-                _context.Update(venue);
-                await _context.SaveChangesAsync();
-
-                TempData["SuccessMessage"] = "Venue updated successfully.";
-                return RedirectToAction(nameof(Index));
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!VenueExists(venue.VenueID))
-                    return NotFound();
-                else
+                    if (!VenueExists(venue.VenueID))
+                        return NotFound();
                     throw;
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "An error occurred while updating the venue.");
+                }
             }
+
+            return View(venue); // Return to form with validation errors
         }
+
 
 
 

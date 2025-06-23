@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Create" method="post">
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="VenueID" class="control-label"></label>
                 <select asp-for="VenueID" class="form-control" asp-items="ViewBag.VenueList">
@@ -22,11 +22,12 @@
             </div>
 
             <div class="form-group">
-                <label> EventType </label>
-                <select asp-for="EventTypeID" asp-items="@(new SelectList((IEnumerable<EventType>)ViewData["EventType"], "EventTypeID", "Name"))" >
-            <option value="">Select type</option>
-                 </select>
-                
+                <label asp-for="EventTypeID" class="control-label">Event Type</label>
+                <select asp-for="EventTypeID" class="form-control"
+                        asp-items="@(new SelectList((IEnumerable<EventEaseApp.Models.EventType>)ViewData["EventType"], "EventTypeID", "Name", Model.EventTypeID))">
+                    <option value="">-- Select Type --</option>
+                </select>
+                <span asp-validation-for="EventTypeID" class="text-danger"></span>
             </div>
 
 

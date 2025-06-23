@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-// this code was sourced from Juliana Adeola Adisa lessons and modified to fit the project
 
 namespace EventEaseApp.Controllers
 {
@@ -15,8 +14,7 @@ namespace EventEaseApp.Controllers
             _context = context;
         }
 
-
-        public async Task<IActionResult> Index(string searchType, int? venueId, DateOnly? startDate, DateOnly? endDate, bool? available) // ✅ NEW: added availability
+        public async Task<IActionResult> Index(string searchType, int? venueId, DateOnly? startDate, DateOnly? endDate, bool? available)
         {
             var events = _context.Event
                 .Include(e => e.Venue)
@@ -38,16 +36,14 @@ namespace EventEaseApp.Controllers
                 events = events.Where(e => e.EventDate >= startDate && e.EventDate <= endDate);
             }
 
-            if (available.HasValue) // ✅ NEW: availability filtering
+            if (available.HasValue)
             {
                 events = events.Where(e => e.Venue.IsAvailable == available.Value);
             }
 
-            // Provide dropdown filter options
             ViewData["EventType"] = _context.EventType.ToList();
             ViewData["Venues"] = _context.Venue.ToList();
 
-            // ✅ Store selected values in ViewBag to pre-fill the form in the view
             ViewBag.SelectedType = searchType;
             ViewBag.SelectedVenue = venueId;
             ViewBag.StartDate = startDate?.ToString("yyyy-MM-dd");
@@ -57,29 +53,20 @@ namespace EventEaseApp.Controllers
             return View(await events.ToListAsync());
         }
 
-
-
-
-
-
         public IActionResult Create()
         {
             PopulateVenueDropdown();
             ViewData["Venues"] = _context.Venue.ToList();
-            return View();
-
-
+            ViewData["EventType"] = _context.EventType.ToList();
+            return View(new Event());
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-       
         public async Task<IActionResult> Create(Event events)
         {
             if (!ModelState.IsValid)
             {
-                // Log model state errors
                 foreach (var entry in ModelState)
                 {
                     foreach (var error in entry.Value.Errors)
@@ -87,15 +74,13 @@ namespace EventEaseApp.Controllers
                         Console.WriteLine($"Field: {entry.Key}, Error: {error.ErrorMessage}");
                     }
                 }
-                
-                PopulateVenueDropdown(); // Repopulate dropdown if validation fails
-                ViewData["EvetTypes"] = _context.EventType.ToList();
+
+                PopulateVenueDropdown();
+                ViewData["Venues"] = _context.Venue.ToList();
+                ViewData["EventType"] = _context.EventType.ToList();
 
                 return View(events);
             }
-
-            //
-            
 
             _context.Add(events);
             await _context.SaveChangesAsync();
@@ -112,10 +97,9 @@ namespace EventEaseApp.Controllers
             if (eventItem == null)
                 return NotFound();
 
-            // Populate venue list for the dropdown
             PopulateVenueDropdown();
-
-            ViewData["EvetTypes"] = _context.EventType.ToList();
+            ViewData["Venues"] = _context.Venue.ToList();
+            ViewData["EventType"] = _context.EventType.ToList();
             return View(eventItem);
         }
 
@@ -143,21 +127,11 @@ namespace EventEaseApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            PopulateVenueDropdown();  // Repopulate dropdown if validation fails
+            PopulateVenueDropdown();
+            ViewData["Venues"] = _context.Venue.ToList();
+            ViewData["EventType"] = _context.EventType.ToList();
             return View(events);
         }
-
-        private void PopulateVenueDropdown()
-        {
-            var venues = _context.Venue
-                .OrderBy(v => v.VenueName)
-                .Select(v => new { v.VenueID, v.VenueName })
-                .ToList();
-
-            ViewBag.VenueList = new SelectList(venues, "VenueID", "VenueName");
-        }
-
-
 
         public async Task<IActionResult> Details(int? eventid)
         {
@@ -168,17 +142,14 @@ namespace EventEaseApp.Controllers
             if (eventItem == null)
                 return NotFound();
 
-            // Fetch Venue Name using VenueID
             var venueName = await _context.Venue
                                            .Where(v => v.VenueID == eventItem.VenueID)
                                            .Select(v => v.VenueName)
                                            .FirstOrDefaultAsync();
 
-            ViewBag.VenueName = venueName;  // Pass Venue Name to the view
-
+            ViewBag.VenueName = venueName;
             return View(eventItem);
         }
-
 
         public async Task<IActionResult> Delete(int eventid)
         {
@@ -186,14 +157,12 @@ namespace EventEaseApp.Controllers
             if (eventItem == null)
                 return NotFound();
 
-            // Fetch Venue Name using VenueID
             var venueName = await _context.Venue
                                            .Where(v => v.VenueID == eventItem.VenueID)
                                            .Select(v => v.VenueName)
                                            .FirstOrDefaultAsync();
 
-            ViewBag.VenueName = venueName;  // Pass Venue Name to the view
-
+            ViewBag.VenueName = venueName;
             return View(eventItem);
         }
 
@@ -205,14 +174,13 @@ namespace EventEaseApp.Controllers
             if (eventItem == null)
                 return NotFound();
 
-            // Check if the event has any bookings associated with it
             var bookingsExist = await _context.Booking
                                                .AnyAsync(b => b.EventID == eventid);
 
             if (bookingsExist)
             {
                 TempData["ErrorMessage"] = "Event cannot be deleted because it is linked to a booking.";
-                return RedirectToAction(nameof(Index)); // Or return to the event details page
+                return RedirectToAction(nameof(Index));
             }
 
             _context.Event.Remove(eventItem);
@@ -226,8 +194,14 @@ namespace EventEaseApp.Controllers
             return _context.Event.Any(e => e.EventID == eventid);
         }
 
-        
+        private void PopulateVenueDropdown()
+        {
+            var venues = _context.Venue
+                .OrderBy(v => v.VenueName)
+                .Select(v => new { v.VenueID, v.VenueName })
+                .ToList();
 
-
+            ViewBag.VenueList = new SelectList(venues, "VenueID", "VenueName");
+        }
     }
 }

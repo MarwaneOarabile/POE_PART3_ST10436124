@@ -9,10 +9,10 @@ namespace EventEaseApp.Models
         public int VenueID { get; set; }
 
         [Required]
-        public string VenueName { get; set; }
+        public string? VenueName { get; set; }
 
         [Required]
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [Required]
         [Range(1, int.MaxValue, ErrorMessage = "Capacity must be a positive number.")]
@@ -26,7 +26,7 @@ namespace EventEaseApp.Models
 
         public bool IsAvailable { get; set; }
 
-        public ICollection<Event> Events { get; set; }
+        public ICollection<Event>? Events { get; set; }
 
     }
 }
